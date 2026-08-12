@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/tasks";
+const API_URL = "https://focus-flow-intital.onrender.com/api/tasks";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);

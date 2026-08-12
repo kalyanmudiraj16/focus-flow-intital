@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const FOCUS_TIME = 25 * 60;
-const API_URL = "http://localhost:5000/api/focus";
+const API_URL = "https://focus-flow-intital.onrender.com/api/focus";
 
 const FocusTimer = () => {
   const [timeLeft, setTimeLeft] = useState(FOCUS_TIME);

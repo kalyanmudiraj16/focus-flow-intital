@@ -21,7 +21,7 @@ const Stats = () => {
   const fetchStats = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/stats"
+        "https://focus-flow-intital.onrender.com/api/stats"
       );
 
       if (!response.ok) {
