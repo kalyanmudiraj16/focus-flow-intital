@@ -1,15 +1,19 @@
-import "./App.css"
+import Navbar from "./components/Navbar";
+import FocusTimer from "./components/FocusTimer";
+import TaskList from "./components/TaskList";
+import Stats from "./components/Stats";
 
-import Navbar from "./components/Navbar"
-import FocusTimer from "./components/FocusTimer"
-import TaskList from "./components/TaskList"
-import Stats from "./components/Stats"
+import "./App.css";
+
 
 function App() {
+
   return (
+
     <div className="app">
 
-      {/* Background video */}
+      {/* Background Video */}
+
       <video
         className="background-video"
         autoPlay
@@ -17,27 +21,51 @@ function App() {
         muted
         playsInline
       >
-        <source src="/focus-bg.mp4" type="video/mp4" />
-        </video>
+        <source
+          src="/focus-bg.mp4"
+          type="video/mp4"
+        />
+      </video>
 
-      {/* Dark layer over video */}
+
+      {/* Dark Overlay */}
+
       <div className="video-overlay"></div>
 
-      {/* Website content */}
+
+      {/* Website */}
+
       <div className="website">
+
+        {/* Home */}
+
+        <div id="home"></div>
+
+
+        {/* Navbar */}
 
         <Navbar />
 
+
+        {/* Main Content */}
+
         <main>
+
           <FocusTimer />
+
           <TaskList />
+
           <Stats />
+
         </main>
 
       </div>
 
     </div>
-  )
+
+  );
+
 }
 
-export default App
+
+export default App;
