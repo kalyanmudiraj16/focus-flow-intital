@@ -7,6 +7,7 @@ const TaskList = () => {
   const [newTask, setNewTask] = useState("");
   const [loading, setLoading] = useState(true);
 
+
   // =========================
   // GET TASKS
   // =========================
@@ -22,14 +23,19 @@ const TaskList = () => {
       const data = await response.json();
 
       setTasks(data);
+
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
+
     } finally {
       setLoading(false);
     }
   };
 
-  // Load tasks when page opens
+
+  // =========================
+  // LOAD TASKS
+  // =========================
 
   useEffect(() => {
     fetchTasks();
@@ -41,7 +47,11 @@ const TaskList = () => {
   // =========================
 
   const addTask = async () => {
-    if (!newTask.trim()) return;
+    const text = newTask.trim();
+
+    if (!text) {
+      return;
+    }
 
     try {
       const response = await fetch(API_URL, {
@@ -52,7 +62,7 @@ const TaskList = () => {
         },
 
         body: JSON.stringify({
-          text: newTask.trim()
+          text: text
         })
       });
 
@@ -60,11 +70,11 @@ const TaskList = () => {
         throw new Error("Failed to create task");
       }
 
-      const task = await response.json();
+      const createdTask = await response.json();
 
-      setTasks((currentTasks) => [
-        task,
-        ...currentTasks
+      setTasks((previousTasks) => [
+        createdTask,
+        ...previousTasks
       ]);
 
       setNewTask("");
@@ -79,10 +89,10 @@ const TaskList = () => {
   // COMPLETE TASK
   // =========================
 
-  const toggleTask = async (id, completed) => {
+  const toggleTask = async (task) => {
     try {
       const response = await fetch(
-        `${API_URL}/${id}`,
+        `${API_URL}/${task._id}`,
         {
           method: "PUT",
 
@@ -91,7 +101,7 @@ const TaskList = () => {
           },
 
           body: JSON.stringify({
-            completed: !completed
+            completed: !task.completed
           })
         }
       );
@@ -102,11 +112,11 @@ const TaskList = () => {
 
       const updatedTask = await response.json();
 
-      setTasks((currentTasks) =>
-        currentTasks.map((task) =>
-          task._id === id
+      setTasks((previousTasks) =>
+        previousTasks.map((item) =>
+          item._id === updatedTask._id
             ? updatedTask
-            : task
+            : item
         )
       );
 
@@ -136,8 +146,8 @@ const TaskList = () => {
         throw new Error("Failed to delete task");
       }
 
-      setTasks((currentTasks) =>
-        currentTasks.filter(
+      setTasks((previousTasks) =>
+        previousTasks.filter(
           (task) => task._id !== id
         )
       );
@@ -162,19 +172,8 @@ const TaskList = () => {
   };
 
 
-  // =========================
-  // VISIBLE TASKS
-  // =========================
-
-  const activeTasks = tasks.filter(
-    (task) => !task.completed
-  );
-
-
   return (
     <section className="task-list">
-
-      {/* HEADER */}
 
       <div className="section-header">
 
@@ -190,105 +189,88 @@ const TaskList = () => {
 
         </div>
 
-      </div>
 
+        <div className="add-task-container">
 
-      {/* ADD TASK */}
+          <input
+            type="text"
+            placeholder="Add a task..."
+            value={newTask}
+            onChange={(event) =>
+              setNewTask(event.target.value)
+            }
+            onKeyDown={handleKeyDown}
+          />
 
-      <div className="task-input-container">
+          <button
+            className="add-task"
+            onClick={addTask}
+          >
+            + Add Task
+          </button>
 
-        <input
-          type="text"
-          placeholder="What do you need to do?"
-          value={newTask}
-          onChange={(event) =>
-            setNewTask(event.target.value)
-          }
-          onKeyDown={handleKeyDown}
-        />
-
-        <button
-          className="add-task"
-          onClick={addTask}
-        >
-          + Add Task
-        </button>
+        </div>
 
       </div>
 
 
-      {/* LOADING */}
+      {loading ? (
 
-      {loading && (
-        <p className="timer-status">
+        <p>
           Loading tasks...
         </p>
-      )}
 
+      ) : tasks.length === 0 ? (
 
-      {/* EMPTY STATE */}
+        <p>
+          No tasks yet. Add your first task!
+        </p>
 
-      {!loading &&
-        activeTasks.length === 0 && (
-          <p className="timer-status">
-            No active tasks. Add a new task!
-          </p>
-        )}
+      ) : (
 
-
-      {/* TASKS */}
-
-      {!loading &&
-        activeTasks.map((task) => (
+        tasks.map((task) => (
 
           <div
             className="task"
             key={task._id}
           >
 
-            {/* CHECKBOX */}
-
             <input
               type="checkbox"
               checked={task.completed}
               onChange={() =>
-                toggleTask(
-                  task._id,
-                  task.completed
-                )
+                toggleTask(task)
               }
             />
 
 
-            {/* TASK TEXT */}
-
-            <span>
+            <span
+              style={{
+                textDecoration: task.completed
+                  ? "line-through"
+                  : "none",
+                opacity: task.completed
+                  ? 0.5
+                  : 1
+              }}
+            >
               {task.text}
             </span>
 
-
-            {/* DELETE */}
 
             <button
               onClick={() =>
                 deleteTask(task._id)
               }
-              style={{
-                marginLeft: "auto",
-                background: "transparent",
-                border: "none",
-                color: "#999",
-                cursor: "pointer",
-                fontSize: "18px"
-              }}
-              title="Delete task"
             >
-              ×
+              Delete
             </button>
 
           </div>
 
-        ))}
+        ))
+
+      )}
 
     </section>
   );
