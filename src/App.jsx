@@ -2,70 +2,60 @@ import Navbar from "./components/Navbar";
 import FocusTimer from "./components/FocusTimer";
 import TaskList from "./components/TaskList";
 import Stats from "./components/Stats";
-
 import "./App.css";
 
-
 function App() {
-
   return (
-
     <div className="app">
 
-      {/* Background Video */}
-
+      {/* Background video */}
       <video
         className="background-video"
         autoPlay
-        loop
         muted
+        loop
         playsInline
       >
-        <source
-          src="/focus-bg.mp4"
-          type="video/mp4"
-        />
+        <source src="/background.mp4" type="video/mp4" />
       </video>
 
-
-      {/* Dark Overlay */}
-
+      {/* Dark overlay */}
       <div className="video-overlay"></div>
 
-
-      {/* Website */}
-
-      <div className="website">
-
-        {/* Home */}
-
-        <div id="home"></div>
-
-
-        {/* Navbar */}
+      {/* Website content */}
+      <div className="app-content">
 
         <Navbar />
 
-
-        {/* Main Content */}
-
         <main>
 
-          <FocusTimer />
+          <section id="home" className="hero-section">
+            <div className="hero-content">
+              <p className="section-label">FOCUS FLOW</p>
+              <h1>Build your focus.<br />Achieve your goals.</h1>
+              <p>
+                Stay focused, manage your tasks and track your productivity.
+              </p>
+            </div>
+          </section>
 
-          <TaskList />
+          <section id="focus" className="content-section">
+            <FocusTimer />
+          </section>
 
-          <Stats />
+          <section id="tasks" className="content-section">
+            <TaskList />
+          </section>
+
+          <section id="stats" className="content-section">
+            <Stats />
+          </section>
 
         </main>
 
       </div>
-
     </div>
-
   );
-
 }
-
 
 export default App;
