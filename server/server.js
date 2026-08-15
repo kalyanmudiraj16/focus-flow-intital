@@ -4,181 +4,95 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
-const Task = require("./models/Task");
-const FocusSession = require("./models/FocusSession");
-
 const taskRoutes = require("./routes/taskRoutes");
 const focusRoutes = require("./routes/focusRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
+const errorMiddleware = require("./middleware/errorMiddleware");
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-
-// =========================
+// ==========================================
 // MIDDLEWARE
-// =========================
+// ==========================================
 
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
-
-// =========================
+// ==========================================
 // ROUTES
-// =========================
+// ==========================================
 
+// Tasks
 app.use("/api/tasks", taskRoutes);
+
+// Focus sessions
 app.use("/api/focus", focusRoutes);
 
+// Analytics / statistics
+app.use("/api/stats", analyticsRoutes);
 
-// =========================
-// REAL STATS API
-// =========================
-
-app.get("/api/stats", async (req, res) => {
-  try {
-
-    // Start of today
-    const startOfDay = new Date();
-    startOfDay.setHours(0, 0, 0, 0);
-
-    // End of today
-    const endOfDay = new Date();
-    endOfDay.setHours(23, 59, 59, 999);
-
-
-    // =========================
-    // FOCUS SESSIONS
-    // =========================
-
-    const sessions = await FocusSession.find({
-      completedAt: {
-        $gte: startOfDay,
-        $lte: endOfDay
-      }
-    });
-
-
-    // Total focus time
-    const totalFocusSeconds = sessions.reduce(
-      (total, session) => {
-        return total + session.duration;
-      },
-      0
-    );
-
-
-    // Convert to hours and minutes
-    const focusHours = Math.floor(
-      totalFocusSeconds / 3600
-    );
-
-    const focusMinutes = Math.floor(
-      (totalFocusSeconds % 3600) / 60
-    );
-
-
-    // =========================
-    // COMPLETED TASKS
-    // =========================
-
-    const tasksDone = await Task.countDocuments({
-      completed: true,
-      updatedAt: {
-        $gte: startOfDay,
-        $lte: endOfDay
-      }
-    });
-
-
-    // =========================
-    // FOCUS SCORE
-    // =========================
-
-    const focusScore = Math.min(
-      100,
-      sessions.length * 20
-    );
-
-
-    // =========================
-    // RESPONSE
-    // =========================
-
-    res.json({
-
-      focusTime: {
-        hours: focusHours,
-        minutes: focusMinutes,
-        totalSeconds: totalFocusSeconds
-      },
-
-      sessions: sessions.length,
-
-      tasksDone,
-
-      focusScore
-
-    });
-
-  } catch (error) {
-
-    console.error(
-      "Stats error:",
-      error
-    );
-
-    res.status(500).json({
-      message: "Failed to fetch stats"
-    });
-  }
-});
-
-
-// =========================
+// ==========================================
 // HOME
-// =========================
+// ==========================================
 
 app.get("/", (req, res) => {
-  res.json({
-    message: "FocusFlow backend is running!"
+  res.status(200).json({
+    success: true,
+    message: "FocusFlow backend is running!",
   });
 });
-
-
-// =========================
+app.use(errorMiddleware);
+// ==========================================
 // TEST API
-// =========================
+// ==========================================
 
 app.get("/api/test", (req, res) => {
-  res.json({
+  res.status(200).json({
     success: true,
-    message: "FocusFlow API is working!"
+    message: "FocusFlow API is working!",
   });
 });
 
+// ==========================================
+// 404 HANDLER
+// ==========================================
 
-// =========================
-// MONGODB
-// =========================
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "API endpoint not found",
+  });
+});
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
+// ==========================================
+// DATABASE + SERVER
+// ==========================================
+
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+
     console.log("MongoDB connected successfully");
-  })
-  .catch((error) => {
+
+    app.listen(PORT, () => {
+      console.log(
+        `FocusFlow server running on http://localhost:${PORT}`
+      );
+    });
+  } catch (error) {
     console.error("MongoDB connection failed:");
     console.error(error.message);
-  });
 
+    process.exit(1);
+  }
+};
 
-// =========================
-// START SERVER
-// =========================
-
-app.listen(PORT, () => {
-  console.log(
-    `FocusFlow server running on http://localhost:${PORT}`
-  );
-});
+startServer();

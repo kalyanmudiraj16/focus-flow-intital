@@ -1,0 +1,391 @@
+/* =========================================================
+   FOCUSFLOW — RESPONSIVE
+========================================================= */
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  /* DASHBOARD */
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .progress-item {
+    grid-column: 1 / -1;
+  }
+
+
+  /* NAV */
+
+  .nav-menu ul {
+    gap: 20px;
+  }
+
+
+  /* TASKS */
+
+  .task-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+========================================================= */
+
+@media (max-width: 760px) {
+
+  :root {
+    --page-padding: 20px;
+  }
+
+
+  /* NAVBAR */
+
+  .navbar {
+    height: 64px;
+
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .menu-btn {
+    display: block;
+
+    margin-left: 12px;
+  }
+
+  .profile-btn {
+    margin-left: auto;
+  }
+
+  .nav-menu {
+    position: absolute;
+
+    top: 64px;
+
+    left: 0;
+    right: 0;
+
+    display: none;
+
+    margin: 0;
+
+    padding: 18px 20px;
+
+    background: rgba(8, 8, 11, 0.97);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .nav-menu.active {
+    display: block;
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 0;
+  }
+
+  .nav-menu li {
+    padding: 13px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+
+  /* DASHBOARD */
+
+  .dashboard {
+    padding-top: 26px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 30px;
+  }
+
+  .dashboard-subtitle {
+    font-size: 13px;
+  }
+
+  .refresh-button {
+    width: 100%;
+  }
+
+  .stats-grid {
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 18px;
+
+    gap: 14px;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .dashboard .stat-card h2 {
+    font-size: 24px;
+  }
+
+  .card-header {
+    padding: 19px 18px 17px;
+  }
+
+  .card-header h2 {
+    font-size: 18px;
+  }
+
+  .task-preview {
+    padding: 15px 18px;
+  }
+
+  .progress-layout {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    padding: 0 18px;
+  }
+
+  .progress-item {
+    grid-column: auto;
+  }
+
+  .overview-stat {
+    padding: 14px 0 0;
+
+    border-left: 0;
+    border-top: 1px solid #2b2b31;
+  }
+
+  .focus-content {
+    min-height: 270px;
+
+    padding: 20px;
+  }
+
+
+  /* TASKS */
+
+  .tasks-page {
+    padding-top: 26px;
+  }
+
+  .tasks-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .tasks-header h1 {
+    font-size: 30px;
+  }
+
+  .tasks-subtitle {
+    font-size: 13px;
+  }
+
+  .task-summary {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .add-task-form {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .add-task-form input,
+  .add-task-button {
+    width: 100%;
+  }
+
+  .tasks-card-header {
+    padding: 19px 18px 17px;
+  }
+
+  .tasks-card-header h2 {
+    font-size: 18px;
+  }
+
+  .task-section-label {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .task-row {
+    min-height: 60px;
+
+    padding: 11px 18px;
+
+    gap: 10px;
+  }
+
+  .task-row-text {
+    font-size: 13px;
+  }
+
+
+  /* FOCUS */
+
+  .focus-page,
+  .analytics-page,
+  .settings-page {
+    padding-top: 26px;
+  }
+
+  .focus-page h1,
+  .analytics-page h1,
+  .settings-page h1 {
+    font-size: 30px;
+  }
+
+  .focus-timer {
+    margin-top: 28px;
+
+    padding: 40px 20px;
+  }
+
+  .timer {
+    font-size: 85px;
+
+    letter-spacing: -0.05em;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  :root {
+    --page-padding: 16px;
+  }
+
+
+  /* NAV */
+
+  .profile-btn {
+    display: none;
+  }
+
+
+  /* DASHBOARD */
+
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+
+  .dashboard-subtitle {
+    font-size: 13px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+
+  /* TASKS */
+
+  .tasks-header h1 {
+    font-size: 28px;
+  }
+
+  .add-task-card {
+    padding: 14px;
+  }
+
+  .task-row {
+    gap: 8px;
+  }
+
+  .delete-task-button {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+  }
+
+
+  /* FOCUS */
+
+  .focus-timer {
+    padding: 32px 16px;
+  }
+
+  .timer {
+    font-size: 64px;
+  }
+
+  .timer-buttons {
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .timer-buttons button {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}

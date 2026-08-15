@@ -1,61 +1,85 @@
-import Navbar from "./components/Navbar";
-import FocusTimer from "./components/FocusTimer";
-import TaskList from "./components/TaskList";
-import Stats from "./components/Stats";
-import "./App.css";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-function App() {
+import AppShell from "./components/layout/AppShell";
+
+import Dashboard from "./pages/Dashboard";
+import Tasks from "./pages/Tasks";
+import Focus from "./pages/Focus";
+import Analytics from "./pages/Analytics";
+import Settings from "./pages/Settings";
+
+import "./styles/variables.css";
+import "./styles/dashboard.css";
+import "./styles/tasks.css";
+import "./styles/focus.css";
+import "./styles/analytics.css";
+import "./styles/settings.css";
+import "./styles/responsive.css";
+
+const App = () => {
   return (
-    <div className="app">
+    <BrowserRouter>
 
-      {/* Background video */}
+      {/* BACKGROUND VIDEO */}
       <video
         className="background-video"
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
       >
-        <source src="/background.mp4" type="video/mp4" />
+        <source
+          src="/focus-bg.mp4"
+          type="video/mp4"
+        />
       </video>
 
-      {/* Dark overlay */}
-      <div className="video-overlay"></div>
+      {/* DARK OVERLAY */}
+      <div className="background-overlay"></div>
 
-      {/* Website content */}
+      {/* WEBSITE */}
       <div className="app-content">
+        <Routes>
 
-        <Navbar />
+          <Route element={<AppShell />}>
 
-        <main>
+            <Route
+              path="/"
+              element={<Dashboard />}
+            />
 
-          <section id="home" className="hero-section">
-            <div className="hero-content">
-              <p className="section-label">FOCUS FLOW</p>
-              <h1>Build your focus.<br />Achieve your goals.</h1>
-              <p>
-                Stay focused, manage your tasks and track your productivity.
-              </p>
-            </div>
-          </section>
+            <Route
+              path="/tasks"
+              element={<Tasks />}
+            />
 
-          <section id="focus" className="content-section">
-            <FocusTimer />
-          </section>
+            <Route
+              path="/focus"
+              element={<Focus />}
+            />
 
-          <section id="tasks" className="content-section">
-            <TaskList />
-          </section>
+            <Route
+              path="/analytics"
+              element={<Analytics />}
+            />
 
-          <section id="stats" className="content-section">
-            <Stats />
-          </section>
+            <Route
+              path="/settings"
+              element={<Settings />}
+            />
 
-        </main>
+          </Route>
 
+        </Routes>
       </div>
-    </div>
+
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

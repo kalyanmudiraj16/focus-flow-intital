@@ -1,0 +1,866 @@
+/* =========================================================
+   ANALYTICS PAGE — FINAL
+   ========================================================= */
+
+.analytics-page {
+  min-height: calc(100vh - 72px);
+  padding: 48px 6% 90px;
+  color: #fff;
+}
+
+.analytics-page-inner {
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.analytics-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin-bottom: 32px;
+}
+
+.analytics-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 24px;
+
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.analytics-back-link:hover {
+  color: #fff;
+  transform: translateX(-2px);
+}
+
+.analytics-eyebrow,
+.analytics-card-eyebrow {
+  margin-bottom: 10px;
+
+  color: #9b8cff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+}
+
+.analytics-header h1 {
+  margin: 0;
+
+  color: #fff;
+  font-size: clamp(42px, 5vw, 60px);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -2.8px;
+}
+
+.analytics-subtitle {
+  max-width: 590px;
+  margin-top: 15px;
+
+  color: rgba(255, 255, 255, 0.53);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   REFRESH
+   ========================================================= */
+
+.analytics-refresh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  height: 43px;
+  padding: 0 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.095);
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.76);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.analytics-refresh-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.analytics-refresh-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.analytics-spin {
+  animation: analytics-spin 0.8s linear infinite;
+}
+
+@keyframes analytics-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.analytics-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 20px;
+  padding: 13px 16px;
+
+  border: 1px solid rgba(255, 90, 110, 0.18);
+  border-radius: 12px;
+
+  background: rgba(255, 70, 90, 0.06);
+  color: #ff9da9;
+
+  font-size: 13px;
+}
+
+.analytics-error button {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================================
+   SCORE CARD
+   ========================================================= */
+
+.analytics-score-card {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+
+  min-height: 275px;
+
+  padding: 42px 50px;
+  margin-bottom: 17px;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 85% 45%,
+      rgba(118, 88, 255, 0.13),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 20, 32, 0.96),
+      rgba(9, 9, 17, 0.96)
+    );
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.28);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.analytics-score-content {
+  max-width: 650px;
+}
+
+.analytics-score-number {
+  margin: 7px 0 5px;
+
+  color: #fff;
+  font-size: clamp(58px, 7vw, 86px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -5px;
+}
+
+.analytics-score-content h2 {
+  margin: 0;
+
+  color: #fff;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.analytics-score-content > p:last-child {
+  margin-top: 8px;
+
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+}
+
+/* =========================================================
+   SCORE RING
+   ========================================================= */
+
+.analytics-score-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 165px;
+  height: 165px;
+  flex-shrink: 0;
+}
+
+.analytics-score-ring-fill {
+  --score: 0deg;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 148px;
+  height: 148px;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #7657ff var(--score),
+      rgba(255, 255, 255, 0.075) var(--score)
+    );
+
+  transform: rotate(-90deg);
+}
+
+.analytics-score-ring-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 116px;
+  height: 116px;
+
+  border-radius: 50%;
+
+  background: #0b0b15;
+  color: #9b8cff;
+
+  transform: rotate(90deg);
+}
+
+.analytics-score-ring-inner strong {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   STAT GRID
+   ========================================================= */
+
+.analytics-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+
+  margin-bottom: 17px;
+}
+
+.analytics-stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  min-height: 150px;
+  padding: 23px;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 18, 31, 0.92),
+      rgba(8, 8, 16, 0.88)
+    );
+
+  box-shadow:
+    0 17px 48px rgba(0, 0, 0, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.analytics-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(118, 88, 255, 0.25);
+}
+
+.analytics-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 41px;
+  height: 41px;
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: rgba(118, 88, 255, 0.09);
+  color: #9d8fff;
+}
+
+.analytics-stat-card span {
+  display: block;
+
+  color: rgba(255, 255, 255, 0.47);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.analytics-stat-card strong {
+  display: block;
+  margin-top: 6px;
+
+  color: #fff;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.analytics-stat-card small {
+  display: block;
+  margin-top: 4px;
+
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.analytics-card {
+  margin-bottom: 17px;
+  padding: 27px;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 18, 31, 0.92),
+      rgba(8, 8, 16, 0.88)
+    );
+
+  box-shadow:
+    0 17px 48px rgba(0, 0, 0, 0.22);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.analytics-card-header {
+  margin-bottom: 26px;
+}
+
+.analytics-card-header h2 {
+  margin: 0;
+
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* =========================================================
+   BREAKDOWN
+   ========================================================= */
+
+.analytics-breakdown {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 32px;
+}
+
+.analytics-breakdown-item {
+  min-width: 0;
+}
+
+.analytics-breakdown-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 11px;
+
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 13px;
+}
+
+.analytics-breakdown-top strong {
+  color: #fff;
+  font-size: 13px;
+}
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.analytics-progress {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.analytics-progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6342e8,
+      #9b8cff
+    );
+
+  transition: width 0.5s ease;
+}
+
+/* =========================================================
+   SESSION DOTS
+   ========================================================= */
+
+.analytics-session-dots {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  min-height: 17px;
+}
+
+.analytics-session-dots span {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.analytics-session-dots span.active {
+  border-color: #7657ff;
+  background: #7657ff;
+
+  box-shadow:
+    0 0 12px rgba(118, 88, 255, 0.32);
+}
+
+/* =========================================================
+   INSIGHT
+   ========================================================= */
+
+.analytics-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+
+  padding: 23px 26px;
+  margin-bottom: 28px;
+
+  border: 1px solid rgba(118, 88, 255, 0.13);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(118, 88, 255, 0.075),
+      rgba(255, 255, 255, 0.022)
+    );
+}
+
+.analytics-insight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: rgba(118, 88, 255, 0.11);
+  color: #9d8fff;
+}
+
+.analytics-insight h2 {
+  margin: 4px 0 0;
+
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.analytics-insight p {
+  max-width: 800px;
+  margin: 6px 0 0;
+
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .analytics-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .analytics-page {
+    padding: 35px 20px 70px;
+  }
+
+  .analytics-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 19px;
+  }
+
+  .analytics-refresh-button {
+    width: 100%;
+  }
+
+  .analytics-score-card {
+    padding: 32px 25px;
+  }
+
+  .analytics-breakdown {
+    grid-template-columns: 1fr;
+    gap: 27px;
+  }
+}
+
+@media (max-width: 560px) {
+  .analytics-score-card {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .analytics-score-ring {
+    align-self: center;
+  }
+
+  .analytics-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-stat-card {
+    min-height: 120px;
+  }
+
+  .analytics-card {
+    padding: 21px;
+  }
+
+  .analytics-insight {
+    padding: 21px;
+  }
+
+  .analytics-header h1 {
+    font-size: 43px;
+  }
+}
+/* =========================================================
+   GLOBAL PAGE SPACING — FINAL POLISH
+   ========================================================= */
+
+.focus-page,
+.analytics-page,
+.settings-page {
+  min-height: calc(100vh - 72px);
+  padding: 32px 5% 70px;
+}
+
+.focus-page-inner,
+.analytics-page-inner,
+.settings-page-inner {
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.focus-page-inner {
+  max-width: 1100px;
+}
+
+.focus-page-header {
+  margin-bottom: 24px;
+}
+
+.focus-back-link {
+  margin-bottom: 18px;
+}
+
+.focus-page-eyebrow,
+.focus-card-eyebrow {
+  margin-bottom: 7px;
+}
+
+.focus-page-heading > p:last-child {
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   ANALYTICS
+   ========================================================= */
+
+.analytics-page-inner {
+  max-width: 1280px;
+}
+
+.analytics-header {
+  margin-bottom: 24px;
+}
+
+.analytics-back-link {
+  margin-bottom: 18px;
+}
+
+.analytics-eyebrow,
+.analytics-card-eyebrow {
+  margin-bottom: 7px;
+}
+
+.analytics-subtitle {
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+.settings-page-inner {
+  max-width: 1050px;
+}
+
+.settings-header {
+  margin-bottom: 24px;
+}
+
+.settings-subtitle {
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   CARDS — REDUCE EXCESSIVE VERTICAL GAPS
+   ========================================================= */
+
+.focus-workspace,
+.focus-active-workspace,
+.focus-complete-workspace {
+  padding: 30px;
+}
+
+.analytics-score-card {
+  min-height: 250px;
+  padding: 36px 45px;
+}
+
+.analytics-card {
+  margin-bottom: 14px;
+  padding: 25px;
+}
+
+.analytics-stats-grid {
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.analytics-stat-card {
+  min-height: 140px;
+  padding: 22px;
+}
+
+.settings-card {
+  margin-bottom: 14px;
+  padding: 26px;
+}
+
+
+/* =========================================================
+   FOCUS INTERNAL SPACING
+   ========================================================= */
+
+.focus-workspace-header {
+  margin-bottom: 28px;
+}
+
+.focus-field {
+  margin-bottom: 22px;
+}
+
+.focus-mode-grid {
+  gap: 10px;
+}
+
+
+/* =========================================================
+   ANALYTICS INTERNAL SPACING
+   ========================================================= */
+
+.analytics-card-header {
+  margin-bottom: 22px;
+}
+
+.analytics-breakdown {
+  gap: 28px;
+}
+
+.analytics-insight {
+  margin-bottom: 20px;
+  padding: 22px 25px;
+}
+
+
+/* =========================================================
+   SETTINGS INTERNAL SPACING
+   ========================================================= */
+
+.settings-card-header {
+  margin-bottom: 20px;
+}
+
+.settings-row {
+  padding: 16px 0;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .focus-page,
+  .analytics-page,
+  .settings-page {
+    padding: 25px 18px 55px;
+  }
+
+  .focus-workspace,
+  .focus-active-workspace,
+  .focus-complete-workspace {
+    padding: 24px 20px;
+  }
+
+  .analytics-score-card {
+    padding: 28px 22px;
+  }
+
+  .analytics-card {
+    padding: 21px;
+  }
+
+  .settings-card {
+    padding: 21px;
+  }
+
+  .focus-page-header,
+  .analytics-header,
+  .settings-header {
+    margin-bottom: 20px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .focus-page,
+  .analytics-page,
+  .settings-page {
+    padding: 22px 14px 50px;
+  }
+
+  .focus-workspace,
+  .focus-active-workspace,
+  .focus-complete-workspace {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .analytics-card,
+  .settings-card {
+    padding: 18px;
+    border-radius: 17px;
+  }
+}
